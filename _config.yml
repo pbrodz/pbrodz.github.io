@@ -11,5 +11,4 @@ show_excerpts: true
 plugins:
   - jekyll-feed
 
-author:
-  name: ""
+author: ""
