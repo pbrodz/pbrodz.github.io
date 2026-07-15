@@ -19,7 +19,6 @@
 
   <header class="site-header">
     <nav class="nav-inner" aria-label="Primary navigation">
-      <span class="nav-name">Paul Brodzinski</span>
       <button class="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
       </button>
@@ -38,7 +37,7 @@
       <div class="container">
         <p class="eyebrow">Principal Software Engineer</p>
         <h1 id="hero-heading">Paul Brodzinski</h1>
-        <p class="hero-title">Azure &amp; .NET Platform Engineer&thinsp;—&thinsp;Principal Level</p>
+        <p class="hero-title">Azure &amp; .NET Platform Engineer</p>
         <p class="hero-bio">~30 years building backend systems, cloud infrastructure, and high-availability platforms. Currently building the payments infrastructure at Subly.</p>
         <div class="hero-links">
           <a href="https://www.linkedin.com/in/paulbrodzinski/" class="btn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
@@ -51,10 +50,26 @@
     <section class="section" id="about" aria-labelledby="about-heading">
       <div class="container">
         <h2 class="section-label" id="about-heading">About</h2>
-        <div class="prose">
+        <div class="prose reveal">
           <p>British-born, Seattle-based. I've spent roughly 30 years in software engineering — including nearly 25 years at Microsoft — building systems that need to be reliable, observable, and fast at scale.</p>
           <p>My expertise sits at the intersection of cloud infrastructure and backend engineering: Azure App Services, Front Door, WAF, Application Insights, Key Vault, and SQL; .NET/C# across the full stack; deliberate API design; and observability built to catch what doesn't page. CI/CD pipelines, security posture, and keeping production honest are the parts I care about most.</p>
           <p>I'm currently Principal Software Engineer at Subly, a micropayment platform for publishers, where I own the full backend and infrastructure stack — from payment flows and API contract design to Azure security architecture and deployment pipelines.</p>
+        </div>
+        <div class="exp-logos reveal" aria-label="Notable experience">
+          <div class="exp-logo">
+            <svg class="exp-logo-mark" viewBox="0 0 23 23" role="img" aria-label="Microsoft logo">
+              <rect x="0" y="0" width="10" height="10" fill="#F25022"/>
+              <rect x="12" y="0" width="10" height="10" fill="#7FBA00"/>
+              <rect x="0" y="12" width="10" height="10" fill="#00A4EF"/>
+              <rect x="12" y="12" width="10" height="10" fill="#FFB900"/>
+            </svg>
+            <span class="exp-logo-label">Microsoft</span>
+            <span class="exp-logo-meta">~25 yrs</span>
+          </div>
+          <div class="exp-logo">
+            <img src="assets/subly.png" alt="Subly" class="exp-logo-mark exp-logo-subly">
+            <span class="exp-logo-meta">Principal Engineer, present</span>
+          </div>
         </div>
       </div>
     </section>
@@ -66,7 +81,7 @@
         <p class="section-sub">Case studies in progress — check back soon.</p>
         <div class="cards">
 
-          <article class="card">
+          <article class="card reveal">
             <div class="card-top">
               <span class="badge">Coming Soon</span>
             </div>
@@ -81,7 +96,7 @@
             </ul>
           </article>
 
-          <article class="card">
+          <article class="card reveal">
             <div class="card-top">
               <span class="badge">Coming Soon</span>
             </div>
@@ -95,7 +110,7 @@
             </ul>
           </article>
 
-          <article class="card">
+          <article class="card reveal">
             <div class="card-top">
               <span class="badge">Coming Soon</span>
             </div>
@@ -117,7 +132,7 @@
 
   <footer class="footer" id="contact">
     <div class="container">
-      <div class="footer-top">
+      <div class="footer-top reveal">
         <div>
           <h2 class="footer-heading">Get in touch</h2>
           <p class="footer-prompt">I'm occasionally open to senior&#8288;/&#8288;principal contract roles. The best way to reach me is LinkedIn.</p>
@@ -148,6 +163,22 @@
           toggle.setAttribute('aria-expanded', 'false');
           toggle.setAttribute('aria-label', 'Open navigation menu');
         });
+      });
+    })();
+
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (!('IntersectionObserver' in window)) return;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.reveal').forEach(function (el) {
+        io.observe(el);
       });
     })();
   </script>
