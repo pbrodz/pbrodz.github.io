@@ -14,6 +14,136 @@
   <meta name="twitter:description" content="~30 years building backend systems, cloud infrastructure, and high-availability platforms. Currently building payments infrastructure at Subly.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%236366f1'/><text x='50' y='68' font-size='48' font-family='system-ui,sans-serif' font-weight='700' text-anchor='middle' fill='white'>PB</text></svg>">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Case study: card CTA */
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: transparent;
+      border: none;
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      padding: 0;
+      margin-top: 0.25rem;
+      align-self: flex-start;
+    }
+    .card-cta:hover { opacity: 0.8; }
+    .card-cta-icon {
+      width: 0.8rem;
+      height: 0.8rem;
+      transition: transform 0.2s ease;
+    }
+    .card-cta[aria-expanded="true"] .card-cta-icon { transform: rotate(180deg); }
+    .badge-live { color: var(--accent); border-color: var(--accent); }
+
+    /* Case study: expanded panel */
+    .case-study {
+      margin-top: var(--s2);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: var(--s3);
+      position: relative;
+    }
+    .case-study-close {
+      position: absolute;
+      top: 1.1rem;
+      right: 1.1rem;
+      width: 2rem;
+      height: 2rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+    .case-study-close:hover { color: var(--text); border-color: #45454e; }
+    .case-study-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .case-study-title {
+      font-size: clamp(1.2rem, 3vw, 1.5rem);
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      padding-right: 2.5rem;
+    }
+    .case-study h4 {
+      font-size: 0.92rem;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      margin-top: 2rem;
+      margin-bottom: 0.65rem;
+    }
+    .case-study h4:first-of-type { margin-top: 0.5rem; }
+    .case-study p {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.92rem;
+      margin-bottom: 0.6rem;
+    }
+    .case-study table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-block: 1rem;
+      font-size: 0.82rem;
+    }
+    .case-study th, .case-study td {
+      text-align: left;
+      padding: 0.5rem 0.7rem;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .case-study th {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .case-study td {
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+    .case-study td.delta-good { color: #6ee7b7; }
+    .case-study td.delta-neutral { color: var(--muted); }
+    .case-study .table-scroll { overflow-x: auto; }
+    .case-study .case-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-style: italic;
+      border-left: 2px solid var(--accent);
+      padding-left: 0.85rem;
+      margin-block: 1.1rem;
+    }
+    .case-study .case-list {
+      list-style: disc;
+      padding-left: 1.15rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.85;
+    }
+    .case-study .case-list li { margin-bottom: 0.35rem; }
+    @media (max-width: 620px) {
+      .case-study { padding: 1.25rem; }
+    }
+  </style>
 </head>
 <body>
 
@@ -89,7 +219,7 @@
 
           <article class="card reveal">
             <div class="card-top">
-              <span class="badge">Coming Soon</span>
+              <span class="badge badge-live">Case Study</span>
             </div>
             <h3 class="card-title">From EF Core to Dapper — Proving the Migration with Load Tests</h3>
             <p class="card-desc">How rigorous k6 load testing turned a performance hypothesis into a data-backed migration strategy for a high-throughput payments API.</p>
@@ -100,6 +230,10 @@
               <li>Azure SQL</li>
               <li>Performance</li>
             </ul>
+            <button class="card-cta" type="button" aria-expanded="false" aria-controls="case-study-dapper" data-case-toggle="case-study-dapper">
+              <span class="card-cta-label">Read the case study</span>
+              <svg class="card-cta-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 16.5 5 9.5l1.4-1.4L12 13.7l5.6-5.6L19 9.5z"/></svg>
+            </button>
           </article>
 
           <article class="card reveal">
@@ -131,6 +265,99 @@
           </article>
 
         </div>
+
+        <div class="case-study" id="case-study-dapper" hidden>
+          <button class="case-study-close" type="button" data-case-close="case-study-dapper" aria-label="Close case study">&times;</button>
+          <p class="case-study-eyebrow">Case Study</p>
+          <h3 class="case-study-title">From EF Core to Dapper — Proving the Migration with Load Tests</h3>
+
+          <p>The payments API's hot paths were spending a growing share of request time inside EF Core's query translation and change-tracking overhead. Rather than rewrite the data-access layer on a hunch, I built the case for a Dapper + stored-procedure migration with a controlled load test first, then confirmed it against real staging and production traffic before calling it done.</p>
+
+          <h4>Controlled baseline: k6 load test</h4>
+          <p>Single endpoint (<code>/zero/validate</code>), 10 virtual users, 30 second duration, p95 &lt; 500ms threshold, run locally against both implementations back to back.</p>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr><th>Metric</th><th>EF Core</th><th>Dapper + sprocs</th><th>Delta</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Throughput</td><td>167 req/s</td><td>323 req/s</td><td class="delta-good">+93%</td></tr>
+                <tr><td>Avg latency</td><td>59.4ms</td><td>30.6ms</td><td class="delta-good">−49%</td></tr>
+                <tr><td>Median latency</td><td>50.4ms</td><td>27.1ms</td><td class="delta-good">−46%</td></tr>
+                <tr><td>p90 latency</td><td>67.6ms</td><td>40.3ms</td><td class="delta-good">−40%</td></tr>
+                <tr><td>p95 latency</td><td>78.7ms</td><td>45.7ms</td><td class="delta-good">−42%</td></tr>
+                <tr><td>Min response</td><td>22.3ms</td><td>12.4ms</td><td class="delta-good">−44%</td></tr>
+                <tr><td>Max response</td><td>1,410ms</td><td>1,230ms</td><td class="delta-good">−13%</td></tr>
+                <tr><td>Iterations (30s)</td><td>5,013</td><td>9,697</td><td class="delta-good">+93%</td></tr>
+                <tr><td>Failed requests</td><td>0</td><td>0</td><td class="delta-neutral">—</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="case-note">Zero failures on either side — this was purely a latency and throughput story, not a stability fix. Twice the traffic at roughly half the latency, for the same 10 VUs.</p>
+
+          <h4>What Dapper actually fixed</h4>
+          <p>EF Core generated anywhere from 3 to 13 sequential SQL calls per request depending on runtime state. Dapper replaced that with a fixed 7–8 calls, 3 of which run in parallel — which is what eliminated the tail latency spikes, not just the average case.</p>
+
+          <h4>Confirming it in staging, on real traffic</h4>
+          <p>Local benchmarks can flatter a change, so I re-ran the comparison against actual staging traffic across both endpoints (East US → West US 2, ~70ms round trip):</p>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr><th>Endpoint</th><th>State</th><th>P50</th><th>P75</th><th>P90</th><th>P95</th><th>SQL calls</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>/zero</td><td>Before (EF)</td><td>1,434</td><td>1,868</td><td>2,469</td><td>3,229</td><td>3–13</td></tr>
+                <tr><td>/zero</td><td>After (Dapper)</td><td class="delta-good">1,097</td><td class="delta-good">1,675</td><td class="delta-good">2,285</td><td class="delta-good">2,423</td><td class="delta-good">8, fixed</td></tr>
+                <tr><td>/zero/validate</td><td>Before (EF)</td><td>1,819</td><td>2,239</td><td>2,885</td><td>5,485</td><td>4–13</td></tr>
+                <tr><td>/zero/validate</td><td>After (Dapper)</td><td class="delta-good">1,104</td><td class="delta-good">1,488</td><td class="delta-good">2,042</td><td class="delta-good">2,369</td><td class="delta-good">7, fixed</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="case-note"><code>/zero</code>: −24% median, −25% at p95 (107→183 sampled requests). <code>/zero/validate</code> was the biggest win: −39% median, −57% at p95 (28→85 sampled requests) — the tail latency EF Core produced under its worst-case query pattern is exactly what disappeared.</p>
+
+          <h4>Production, so far</h4>
+          <p><code>/zero</code> held roughly steady on median (~2ms round trip to a co-located SQL instance leaves little room to improve) but still cut p95 by 18% and p99 by 43%, with SQL calls capped instead of variable. <code>/zero/validate</code> doesn't have enough production traffic yet to draw a real conclusion — staging is the stronger signal for that endpoint for now.</p>
+
+          <h4>Extending the pattern: the <code>/unlock</code> endpoint</h4>
+          <p>A teammate had already profiled <code>/unlock</code>'s read phase at roughly 340ms sequential — content lookup (~70ms), pass check (~70ms), and a slow <code>Scu.Find</code> call (~200ms) backed by 3–4 EF queries. Moving that path to Dapper cut it to 70–140ms depending on scenario, without touching the write path:</p>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr><th>Scenario</th><th>Time</th><th>Saving</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>lssk present (common path)</td><td>~70ms</td><td class="delta-good">−270ms</td></tr>
+                <tr><td>No lssk (content + pass parallel, then Scu)</td><td>~140ms</td><td class="delta-good">−200ms</td></tr>
+                <tr><td>Already unlocked (parallel reads, no EF)</td><td>~70ms</td><td class="delta-good">−270ms</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4>POST /api/Content, staging</h4>
+          <p>Same pattern applied to the content write path. Sample size is still small (33 → 11 requests as of writing) so treat this as an early read rather than a settled result, but every metric moved the right direction:</p>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr><th>Metric</th><th>Before</th><th>After</th><th>Delta</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Avg request time</td><td>2,062ms</td><td>1,340ms</td><td class="delta-good">−35%</td></tr>
+                <tr><td>P95 request time</td><td>3,822ms</td><td>2,058ms</td><td class="delta-good">−46%</td></tr>
+                <tr><td>P99 request time</td><td>4,354ms</td><td>2,058ms</td><td class="delta-good">−53%</td></tr>
+                <tr><td>Avg SQL calls</td><td>13.8</td><td>8.0</td><td class="delta-good">−42%</td></tr>
+                <tr><td>P95 SQL calls</td><td>16</td><td>8</td><td class="delta-good">−50%</td></tr>
+                <tr><td>Avg total SQL time</td><td>1,061ms</td><td>629ms</td><td class="delta-good">−41%</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4>What's next</h4>
+          <ul class="case-list">
+            <li>With SQL overhead cut this much, roughly 85% of remaining request time on production is now inside .NET middleware — auth, CORS, validation. That's the next thing to profile.</li>
+            <li>Before treating Dapper as the default going forward, I'm testing EF Core with <code>AsNoTracking</code> as a lighter-weight alternative, on a teammate's suggestion — my working hypothesis is it recovers maybe 20–30% of the gap, not the full win, but it's worth ruling out before adding a second data-access pattern to the codebase permanently.</li>
+          </ul>
+        </div>
+
       </div>
     </section>
 
@@ -191,6 +418,40 @@
       }, { threshold: 0.15 });
       document.querySelectorAll('.reveal').forEach(function (el) {
         io.observe(el);
+      });
+    })();
+
+    (function () {
+      function setLabel(btn, text) {
+        var label = btn.querySelector('.card-cta-label');
+        if (label) label.textContent = text;
+      }
+      document.querySelectorAll('[data-case-toggle]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var id = btn.getAttribute('data-case-toggle');
+          var panel = document.getElementById(id);
+          if (!panel) return;
+          var willOpen = panel.hidden;
+          panel.hidden = !willOpen;
+          btn.setAttribute('aria-expanded', String(willOpen));
+          setLabel(btn, willOpen ? 'Hide case study' : 'Read the case study');
+          if (willOpen) {
+            panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+      document.querySelectorAll('[data-case-close]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var id = btn.getAttribute('data-case-close');
+          var panel = document.getElementById(id);
+          if (panel) panel.hidden = true;
+          var toggle = document.querySelector('[data-case-toggle="' + id + '"]');
+          if (toggle) {
+            toggle.setAttribute('aria-expanded', 'false');
+            setLabel(toggle, 'Read the case study');
+            toggle.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        });
       });
     })();
   </script>
