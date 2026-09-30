@@ -93,12 +93,12 @@ a {
 
 .nav-group { display: flex; align-items: center; }
 
-.nav-social { display: flex; align-items: center; gap: 1.25rem; margin-left: 1.75rem; }
+.nav-social { display: flex; align-items: center; gap: 1rem; margin-left: 1.25rem; }
 .nav-social a { display: inline-flex; line-height: 0; color: var(--muted); transition: color 0.15s; }
 .nav-social a:hover { color: var(--text); }
-.nav-social svg { width: 1.75rem; height: 1.75rem; }
+.nav-social svg { width: 1rem; height: 1rem; }
 .nav-forge { display: inline-flex; line-height: 0; }
-.nav-forge img { width: 1.75rem; height: 1.75rem; border-radius: 6px; display: block; }
+.nav-forge img { width: 1rem; height: 1rem; border-radius: 4px; display: block; }
 
 .nav-links {
   display: flex;
