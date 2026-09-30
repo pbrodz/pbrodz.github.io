@@ -193,15 +193,15 @@ a {
 
 .hero-social {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.65rem;
 }
 
 .icon-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.15rem;
-  height: 2.15rem;
+  width: 2.75rem;
+  height: 2.75rem;
   border: 1px solid var(--border);
   border-radius: 50%;
   color: var(--muted);
@@ -209,8 +209,25 @@ a {
 }
 
 .icon-btn svg {
-  width: 1.05rem;
-  height: 1.05rem;
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.icon-btn--forge {
+  padding: 0;
+  overflow: hidden;
+  color: #f0f6fc;
+}
+
+.icon-btn--forge img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.icon-btn--forge:hover {
+  border-color: #6366f1;
 }
 
 .icon-btn:hover {
