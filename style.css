@@ -82,11 +82,21 @@ a {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   max-width: var(--w);
   margin-inline: auto;
   padding: 1rem var(--s2);
 }
+
+.brand { display: inline-flex; line-height: 0; }
+.brand-mark { width: 2rem; height: 2rem; }
+
+.nav-group { display: flex; align-items: center; }
+
+.nav-social { display: flex; align-items: center; gap: 1.1rem; margin-left: 1.5rem; }
+.nav-social a { display: inline-flex; line-height: 0; color: var(--muted); transition: color 0.15s; }
+.nav-social a:hover { color: var(--text); }
+.nav-social svg { width: 1.4rem; height: 1.4rem; }
 
 .nav-links {
   display: flex;
@@ -271,8 +281,8 @@ a {
 }
 
 .btn-icon {
-  width: 1rem;
-  height: 1rem;
+  width: 1.25rem;
+  height: 1.25rem;
   flex-shrink: 0;
 }
 
