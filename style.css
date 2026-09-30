@@ -328,7 +328,7 @@ a {
    =========================== */
 
 .prose {
-  max-width: 660px;
+  max-width: none;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -348,7 +348,7 @@ a {
   flex-wrap: wrap;
   align-items: center;
   gap: 1.75rem;
-  margin-top: 1.5rem;
+  margin-bottom: 1.75rem;
 }
 
 .exp-logo {
