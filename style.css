@@ -252,6 +252,15 @@ a {
   background: rgba(240, 246, 252, 0.1);
 }
 
+.icon-btn--substack {
+  color: #ff6719;
+}
+
+.icon-btn--substack:hover {
+  border-color: #ff6719;
+  background: rgba(255, 103, 25, 0.12);
+}
+
 .hero-title {
   font-family: var(--font-mono);
   font-size: 0.85rem;
